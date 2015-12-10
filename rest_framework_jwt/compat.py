@@ -4,6 +4,8 @@ import rest_framework
 from rest_framework import serializers
 from django.forms import widgets
 
+from app.backend.authentication.models import CustomUser as User
+
 
 if StrictVersion(rest_framework.VERSION) < StrictVersion('3.0.0'):
     class Serializer(serializers.Serializer):
@@ -24,13 +26,6 @@ else:
 
 
 def get_user_model():
-    try:
-        from django.contrib.auth import get_user_model
-    except ImportError:  # Django < 1.5
-        from django.contrib.auth.models import User
-    else:
-        User = get_user_model()
-
     return User
 
 
