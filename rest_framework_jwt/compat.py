@@ -4,7 +4,7 @@ import rest_framework
 from rest_framework import serializers
 from django.forms import widgets
 
-from app.backend.authentication.models import CustomUser as User
+from app.backend.authentication.models import User
 
 
 if StrictVersion(rest_framework.VERSION) < StrictVersion('3.0.0'):
