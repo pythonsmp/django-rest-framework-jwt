@@ -13,8 +13,9 @@ from rest_framework_jwt.compat import (
     get_user_model, get_username_field, PasswordField
 )
 
+from app.backend.authentication.models import CustomUser as User
 
-User = get_user_model()
+
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
