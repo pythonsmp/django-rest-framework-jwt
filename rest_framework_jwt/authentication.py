@@ -43,6 +43,11 @@ class BaseJSONWebTokenAuthentication(BaseAuthentication):
 
         user = self.authenticate_credentials(payload)
         user_logged_in.send(sender=user.__class__, request=request, user=user)
+        
+        user_agent_data = request.META['HTTP_USER_AGENT']
+        if 'Mobile' in user_agent_data or 'Android' in user_agent_data or 'iPhone' in user_agent_data:
+            if payload['app_token'] != user.device_token:
+                raise exceptions.AuthenticationFailed('Signed from other device')
 
         return (user, jwt_value)
 
