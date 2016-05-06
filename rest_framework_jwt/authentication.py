@@ -47,10 +47,10 @@ class BaseJSONWebTokenAuthentication(BaseAuthentication):
         user_agent_data = request.META['HTTP_USER_AGENT']
         if 'Mobile' in user_agent_data or 'Android' in user_agent_data or 'iPhone' in user_agent_data:
             if payload['app_token'] != user.app_token:
-                raise exceptions.PermissionDenied('Signed from other device')
+                raise exceptions.NotAuthenticated('Signed from other device')
         else:
         	if payload['web_token'] != user.web_token:
-	            raise exceptions.PermissionDenied('Signed from other browser')
+	            raise exceptions.NotAuthenticated('Signed from other browser')
 
         return (user, jwt_value)
 
